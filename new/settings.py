@@ -2,18 +2,12 @@
 
 from pathlib import Path
 import django_heroku
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*kddu3&$kjdi1twqme!@=b0@u!k*r)bv4bm_71&re$4al1k+$)'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
@@ -67,8 +61,12 @@ WSGI_APPLICATION = 'new.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  'd32cccpvfp9688',
+        'PORT': 5432,
+        'HOST': 'ec2-54-146-84-101.compute-1.amazonaws.com',
+        'USER': 'sfmdilofupayzd',
+        'PASSWORD': '881ba1bb606806be519aa6e22313e7fdf69eb4f13264d22951d59d0e2953f40d',
     }
 }
 
@@ -123,6 +121,7 @@ except ImportError:
     pass
 
 if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
     import django_heroku
     django_heroku.settings(locals())
 
